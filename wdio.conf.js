@@ -50,9 +50,11 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            args: ['--headless', '--disable-gpu', '--window-size=1920x1080'] // додаємо аргументи для headless
+        }
     }],
-
     //
     // ===================
     // Test Configurations
@@ -184,8 +186,10 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: async function (capabilities, specs) {
+        await browser.setWindowSize(1920, 1080);
+        await browser.setTimeout({ pageLoad: 600000 });
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
