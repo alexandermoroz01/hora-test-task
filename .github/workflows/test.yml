@@ -34,5 +34,5 @@ jobs:
           destination-github-username: "alexandermoroz01"
           destination-repository-name: "hora-allure"
           user-email: alexandermoroz01@gmail.com
-          target-directory: "./"
+          target-directory: "./allure/"
           target-branch: main
