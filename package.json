@@ -2,7 +2,8 @@
   "name": "hora-test-task",
   "type": "module",
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "allure:generate": "allure generate allure-results --clean"
   },
   "devDependencies": {
     "@wdio/allure-reporter": "^9.12.3",
