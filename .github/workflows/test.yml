@@ -31,7 +31,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: "./allure-report"
-          destination-github-username: "TESTRSLB"
+          destination-github-username: "alexandermoroz01"
           destination-repository-name: "hora-allure"
           user-email: alexandermoroz01@gmail.com
           target-directory: "./"
