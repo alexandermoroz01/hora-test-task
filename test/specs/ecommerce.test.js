@@ -7,6 +7,14 @@ import { Helper } from '../helpers/helper.js';
 
 describe('E-Commerce Checkout on Demoblaze', () => {
     let cards = [], costs = [];
+    const data = {
+        name: 'John Doe',
+        country: 'Ukraine',
+        city: 'Kyiv',
+        credit_card: '4111111111111111',
+        month: 'April',
+        year: '2025'
+    };
 
     beforeEach(`open the page`, async () => {
         await MainPage.open();
@@ -34,5 +42,20 @@ describe('E-Commerce Checkout on Demoblaze', () => {
         expect(Number(await CartPage.getTotalLabelText())).toBe(Helper.sumArray(costs));
 
         await CartPage.clickPlaceOrderBtn();
+        await Promise.all([
+            CartPage.setNameInputValue(data.name),
+            CartPage.setCountryInputValue(data.country),
+            CartPage.setCityInputValue(data.city),
+            CartPage.setCreditCardInputValue(data.credit_card),
+            CartPage.setMonthInputValue(data.month),
+            CartPage.setYearInputValue(data.year)
+        ]);
+        await CartPage.clickPurchaseBtn();
+        await CartPage.waitSuccessPurchaseLabelForDisplayed();
+        await Promise.all([
+            await expect(await CartPage.getPurchaseInfoLabelText()).toContain(`Amount: ${Helper.sumArray(costs)} USD`),
+            await expect(await CartPage.getPurchaseInfoLabelText()).toContain(`Name: ${data.name}`),
+            await expect(await CartPage.getPurchaseInfoLabelText()).toContain(`Card Number: ${data.credit_card}`)
+        ]);
     });
 });

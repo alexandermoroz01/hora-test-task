@@ -23,6 +23,18 @@ export default class Page {
         return await $(element);
     }
 
+
+    async setElementValue(element, value) {
+        try {
+            await this.waitElementForDisplayed(element);
+            await this.waitElementForClickable(element);
+            await (await this.getElement(element)).setValue(value);
+        } catch (error) {
+            console.error(`Error set element value: ${element} -`, error.message);
+            throw new Error(`Failed to set element value: ${element}`);
+        }
+    }
+
     async click(element) {
         try {
             await this.waitElementForDisplayed(element);
@@ -45,6 +57,7 @@ export default class Page {
     }
 
     async waitElementForDisplayed(element, timeout = this.defaultTimeout) {
+        timeout = timeout ?? this.defaultTimeout;
         try {
             await (await this.getElement(element)).waitForDisplayed({ timeout });
         } catch (error) {
@@ -54,6 +67,7 @@ export default class Page {
     }
     
     async waitElementForClickable(element, timeout = this.defaultTimeout) {
+        timeout = timeout ?? this.defaultTimeout;
         try {
             await (await this.getElement(element)).waitForClickable({ timeout });
         } catch (error) {
