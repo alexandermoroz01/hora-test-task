@@ -23,3 +23,16 @@ jobs:
         if: always()
         run:
           npm run wdio
+
+      - name: Pushes to another repository allure-report
+        if: always()
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: "./allure-report"
+          destination-github-username: "TESTRSLB"
+          destination-repository-name: "hora-allure"
+          user-email: alexandermoroz01@gmail.com
+          target-directory: "./"
+          target-branch: main
