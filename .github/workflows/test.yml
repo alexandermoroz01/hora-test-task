@@ -24,6 +24,14 @@ jobs:
         run:
           npm run wdio
 
+      - name: Copy History
+        if: always()
+        run: git clone https://${{ secrets.API_TOKEN_GITHUB }}:x-oauth-basic@github.com/alexandermoroz01/hora-allure.git
+
+      - name: Create Report with History
+        if: always()
+        run: cp -r $(pwd)/hora-allure/allure/history $(pwd)/allure-results/ || true && npm run allure:generate
+
       - name: Pushes to another repository allure-report
         if: always()
         uses: cpina/github-action-push-to-another-repository@main
