@@ -8,4 +8,4 @@
     npm run wdio
 
 # Allure Report
-    [LINK](https://alexandermoroz01.github.io/hora-allure/allure/)
+[LINK](https://alexandermoroz01.github.io/hora-allure/allure/)
